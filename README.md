@@ -9,3 +9,12 @@
 #### 預計使用的技術：
 - python eel (資料處理邏輯)
 - html, css, javascript (gui)
+
+## SwiftDocz
+- 社團資訊為一個class
+- 每個class在資料庫中為一個表
+### todo:
+- 編輯社團資訊的頁面
+- 新增活動的頁面
+- 管理活動的頁面
+- 管理會議記錄的頁面
