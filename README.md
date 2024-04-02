@@ -12,6 +12,8 @@
 - sqlite（資料庫）
 
 ## SwiftDocz
+### Wid-PapWorse計畫的益思社實現
+### 大致邏輯：
 - 社團資訊為一個class
 - 每個class在資料庫中為一個表
 - 用戶可新增或刪除「檔案總表」的檔案
