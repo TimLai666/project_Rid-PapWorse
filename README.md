@@ -12,7 +12,7 @@
 - sqlite（資料庫）
 
 ## SwiftDocz
-### Wid-PapWorse計畫的益思社實現
+### Rid-PapWorse計畫的益思社實現
 #### 大致邏輯：
 - 社團資訊為一個class
 - 每個class在資料庫中為一個表
