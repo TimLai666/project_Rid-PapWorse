@@ -58,54 +58,38 @@
         .folder.open .folder-content {
             display: block;
         }
-        .flex-row {
-            display: flex; /* 使用flex布局 */
-            justify-content: center; /* 水平居中 */
-            gap: 20px; /* 容器之间的间隔 */
-        }
-        .file-system-container {
-            height: 500px;
-            width: 400px;
-        }
     </style>
 </head>
 
 <body class="bg-gray-100">
-    <div class="flex-row">
-        <div class="file-system-container mx-auto p-6" style="height: 500px;width: 400px;">
-            <h1 class="text-2xl font-bold mb-4">我的云端硬盘</h1>
-            <div id="file-system1" class="w-full bg-gray-300 p-4 shadow overflow-hidden sm:rounded-md" style="height: 100%;">
-                <div class="custom-scrollbar pr-2" style="height: 100%;">
-                    <div class="folder">
-                        <div class="folder-header flex justify-between items-center">
-                            <span><i class="fas fa-folder mr-2"></i>文件夹2</span>
-                            <i class="fas fa-chevron-right"></i>
-                        </div>
-                        <div class="folder-content bg-gray-500 -mt-2 mb-2">
-                            <div class="file-item"><i class="fas fa-file-alt text-gray-400 mr-3"></i>文件2-1</div>
-                        </div>
-                    </div>
-                    <div class="file-item"><i class="fas fa-file-alt text-gray-400 mr-3"></i>独立文件</div>
-            </div>
+    <div class="flex">
+        <div class="container mx-auto p-6" style="height: 500px;width: 400px;">
+            <h1 class="text-2xl font-bold mb-4">管理所有文件</h1>
+            <iframe id="frame" src="filemanager.html" width="400px" height="500px"></iframe>
         </div>
-        <div class="file-system-container mx-auto p-6" style="height: 500px;width: 400px;">
-            <h1 class="text-2xl font-bold mb-4">我的云端硬盘</h1>
-            <div id="file-system2" class="w-full bg-gray-300 p-4 shadow overflow-hidden sm:rounded-md" style="height: 100%;">
+        
+
+        <div class="container mx-auto p-6" style="height: 500px;width: 400px;">
+            <h1 class="text-2xl font-bold mb-4">組織評鑑資料架構</h1>
+            <div id="file-system" class="bg-gray-300 p-4 shadow overflow-hidden sm:rounded-md" style="height: 100%;">
                 <div class="custom-scrollbar pr-2" style="height: 100%;">
                     <div class="folder">
                         <div class="folder-header flex justify-between items-center">
-                            <span><i class="fas fa-folder mr-2"></i>文件夹2</span>
+                            <span><i class="fas fa-folder mr-2"></i>文件夹1</span>
                             <i class="fas fa-chevron-right"></i>
                         </div>
-                        <div class="folder-content bg-gray-500 -mt-2 mb-2">
-                            <div class="file-item"><i class="fas fa-file-alt text-gray-400 mr-3"></i>文件2-1</div>
+                        <div class="folder-content bg-gray-500 -m-2 mb-2">
+                            <!-- 初始为空，演示空文件夹也可以接收拖拽 -->
                         </div>
                     </div>
                     <div class="file-item"><i class="fas fa-file-alt text-gray-400 mr-3"></i>独立文件</div>
+                </div>
             </div>
         </div>
     </div>
-    
+
+
+    </div>
 
     <script>
         document.querySelectorAll('.folder-header').forEach(header => {
@@ -133,6 +117,8 @@
 
         // 初始化每个文件夹的Sortable
         document.querySelectorAll('.folder-content').forEach(initSortable);
+
+
     </script>
 </body>
 
