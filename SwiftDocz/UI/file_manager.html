@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>我的云端硬盘 - 支持空文件夹和子文件夹拖拽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+        }
+
+        .custom-scrollbar {
+            overflow-y: scroll;
+            max-height: 600px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 20px;
+            border: 3px solid #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        .file-item,
+        .folder-header {
+            background: #ffffff;
+            margin-bottom: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.25rem;
+            padding: 6px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .folder-content {
+            display: none;
+            padding-left: 20px;
+            min-height: 20px;
+            /* 确保空文件夹有可拖拽的空间 */
+        }
+
+        .folder.open .folder-content {
+            display: block;
+        }
+        .flex-row {
+            display: flex; /* 使用flex布局 */
+            justify-content: center; /* 水平居中 */
+            gap: 20px; /* 容器之间的间隔 */
+        }
+        .file-system-container {
+            height: 500px;
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="flex-row">
+        <div class="file-system-container mx-auto p-6" style="height: 500px;width: 400px;">
+            <h1 class="text-2xl font-bold mb-4">我的云端硬盘</h1>
+            <div id="file-system1" class="w-full bg-gray-300 p-4 shadow overflow-hidden sm:rounded-md" style="height: 100%;">
+                <div class="custom-scrollbar pr-2" style="height: 100%;">
+                    <div class="folder">
+                        <div class="folder-header flex justify-between items-center">
+                            <span><i class="fas fa-folder mr-2"></i>文件夹2</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="folder-content bg-gray-500 -mt-2 mb-2">
+                            <div class="file-item"><i class="fas fa-file-alt text-gray-400 mr-3"></i>文件2-1</div>
+                        </div>
+                    </div>
+                    <div class="file-item"><i class="fas fa-file-alt text-gray-400 mr-3"></i>独立文件</div>
+            </div>
+        </div>
+        <div class="file-system-container mx-auto p-6" style="height: 500px;width: 400px;">
+            <h1 class="text-2xl font-bold mb-4">我的云端硬盘</h1>
+            <div id="file-system2" class="w-full bg-gray-300 p-4 shadow overflow-hidden sm:rounded-md" style="height: 100%;">
+                <div class="custom-scrollbar pr-2" style="height: 100%;">
+                    <div class="folder">
+                        <div class="folder-header flex justify-between items-center">
+                            <span><i class="fas fa-folder mr-2"></i>文件夹2</span>
+                            <i class="fas fa-chevron-right"></i>
+                        </div>
+                        <div class="folder-content bg-gray-500 -mt-2 mb-2">
+                            <div class="file-item"><i class="fas fa-file-alt text-gray-400 mr-3"></i>文件2-1</div>
+                        </div>
+                    </div>
+                    <div class="file-item"><i class="fas fa-file-alt text-gray-400 mr-3"></i>独立文件</div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        document.querySelectorAll('.folder-header').forEach(header => {
+            header.addEventListener('click', function () {
+                const folderContent = this.nextElementSibling;
+                folderContent.style.display = folderContent.style.display === 'block' ? 'none' : 'block';
+                this.querySelector('.fas').classList.toggle('fa-chevron-right');
+                this.querySelector('.fas').classList.toggle('fa-chevron-down');
+            });
+        });
+
+        const initSortable = (selector) => {
+            new Sortable(selector, {
+                group: 'shared',
+                animation: 150,
+                fallbackOnBody: true,
+                swapThreshold: 0.65,
+                dragoverBubble: true,
+                emptyInsertThreshold: 5, // 空容器的像素阈值，用于拖拽
+            });
+        };
+
+        // 初始化根文件系统的Sortable
+        initSortable(document.getElementById('file-system'));
+
+        // 初始化每个文件夹的Sortable
+        document.querySelectorAll('.folder-content').forEach(initSortable);
+    </script>
+</body>
+
+</html>
