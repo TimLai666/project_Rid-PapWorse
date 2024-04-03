@@ -1,5 +1,4 @@
 import sqlite3
-from DBBackup import backup as db_backup
 import time
 
 # 資料庫路徑
@@ -124,78 +123,32 @@ def create_trigger(trigger_name: str, action: str, table_name: str, triggering_e
     """
     do_database_operations(sql_statement)
 
-# def init_db() -> None:
-#     # table['表名'] = [{
-#     #   '屬性1': '資料型態1', '屬性2': '資料型態2'
-#     # }, {
-#     #   '外來鍵名稱': '參考表格(參考屬性)'
-#     # }]
-#     tables: dict[str, list[dict, list, dict]] = {}
+def init_db(tables: dict[str, list[dict, dict]]) -> None:
+    # table['表名'] = [{
+    #   '屬性1': '資料型態1', '屬性2': '資料型態2'
+    # }, {
+    #   '外來鍵名稱': '參考表格(參考屬性)'
+    # }]
 
-#     # Users
-#     tables['Users'] = [{
-#         'uuid': 'TEXT PRIMARY KEY',
-#         'username': 'TEXT',
-#         'email': 'TEXT',
-#         'password': 'TEXT',
-#         'firstname': 'TEXT',
-#         'lastname': 'TEXT',
-#         'phone': 'TEXT'
-#     }, {
-#         # 無外來鍵
-#     }]
-
-#     # SessionRecords
-#     tables['SessionRecords'] = [{
-#         'session_id': 'TEXT PRIMARY KEY',
-#         'time': 'DATETIME',
-#         'ip': 'TEXT',
-#         'expiration': 'DATETIME',
-#         'is_active': 'BOOLEAN',
-#         'user_uuid': 'TEXT'
-#     }, {
-#         'user_uuid': 'Users(uuid)'
-#     }]
-
-#     # Games
-#     tables['Games'] = [{
-#         'name':'TEXT PRIMARY KEY',
-#         'highest_score': 'REAL DEFAULT 0',
-#         'achievement_holder': 'TEXT'
-#     }, {
-#         'achievement_holder': 'Users(uuid)'
-#     }]
-
-#     tables['GamePlayingRecords'] = [{
-#         'record_id': 'INTEGER PRIMARY KEY AUTOINCREMENT',
-#         'game_name': 'TEXT',
-#         'user_uuid': 'TEXT',
-#         'time': 'DATETIME',
-#         'score': 'REAL'
-#     }, {
-#         'game_name': 'Games(name)',
-#         'user_uuid': 'Users(uuid)'
-#     }]
-
-#     for relation in tables:
-#         create_table(relation, tables[relation][0], tables[relation][1])
+    for relation in tables:
+        create_table(relation, tables[relation][0], tables[relation][1])
     
-#     # 更新已有的表格結構
-#     update_db(tables)
+    # 更新已有的表格結構
+    update_db(tables)
 
-#     # 创建一个触发器来自动更新 Games 表的 highest_score 字段
-#     create_trigger(
-#         trigger_name="UpdateHighestScoreAndHolder",
-#         action="AFTER INSERT",
-#         table_name="GamePlayingRecords",
-#         triggering_event="NEW.score > (SELECT highest_score FROM Games WHERE name = NEW.game_name)",
-#         sql_operation="""
-#         UPDATE Games
-#         SET highest_score = NEW.score,
-#             achievement_holder = NEW.user_uuid
-#         WHERE name = NEW.game_name
-#         """
-#     )
+    # 创建一个触发器来自动更新 Games 表的 highest_score 字段
+    create_trigger(
+        trigger_name="UpdateHighestScoreAndHolder",
+        action="AFTER INSERT",
+        table_name="GamePlayingRecords",
+        triggering_event="NEW.score > (SELECT highest_score FROM Games WHERE name = NEW.game_name)",
+        sql_operation="""
+        UPDATE Games
+        SET highest_score = NEW.score,
+            achievement_holder = NEW.user_uuid
+        WHERE name = NEW.game_name
+        """
+    )
 
 # updating_tables: dict[表名, 結構]
 def update_db(updating_tables: dict[str, list]):
