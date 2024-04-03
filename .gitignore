@@ -2,3 +2,4 @@ build
 dist
 .venv
 *.spec
+/SwiftDocz/app/__pycache__
