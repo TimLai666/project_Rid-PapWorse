@@ -3,6 +3,7 @@ import time
 
 eel.init('UI')  # 假设您的HTML/CSS/JavaScript文件都放在`web`目录下
 
+@eel.expose
 def switchPage(page: str):
     eel.switchPage(page)
 
