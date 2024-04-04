@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .file-manager {
+            background-color: rgba(255, 255, 255, 1);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 20px;
+            width: 60%;
+            max-width: 450px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .file-manager h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .file-manager ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .file-manager ul li {
+            background-color: rgba(0, 0, 0, 0.06);
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .file-manager ul li:last-child {
+            margin-bottom: 0;
+        }
+
+        .file-manager button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+
+        .file-manager button:hover {
+            background-color: #555;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder" style="display: block;"></div>
+    <script src="loadNavBar.js"></script>
+
+    <section style="display: flex;
+    justify-content: center;align-items: center;height: 90%;">
+        <div class="file-manager">
+            <h1 style="text-align: center;">所有檔案</h1>
+            <button
+                style="width: 100%;margin-bottom: 10px;font-size: large;background-color: rgb(59 130 246);">新增</button>
+            <ul>
+                <li>
+                    <span>document.pdf</span>
+                    <button>編輯</button>
+                    <button>刪除</button>
+                </li>
+                <li>
+                    <span>image.png</span>
+                    <button>編輯</button>
+                </li>
+                <li>
+                    <span>presentation.pptx</span>
+                    <button>編輯</button>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+</body>
+
+</html>

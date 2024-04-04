@@ -60,9 +60,9 @@
             </div>
 
             <div class="mt-3">
-                <h2 class="text-center mb-1">Step 2: 再選擇功能</h2>
+                <h2 class="text-center mb-2">Step 2: 再選擇功能</h2>
                 <div class="flex items-center justify-center">
-                    <div class="mr-1" style="width: 40%;">
+                    <div class="mr-3" style="width: 40%;">
                         <button
                             class="w-full bg-gray-800 text-white rounded-md py-2 mb-3 border-2 border-gray-800 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600 focus:ring-opacity-50"
                             id="editInfo">管理社團資訊</button>
@@ -83,6 +83,9 @@
                         <button
                             class="w-full bg-transparent text-gray-600 rounded-md py-2 mb-3 border-2 border-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50"
                             id="makeEvalFiles">製作評鑑檔案</button>
+                        <button
+                            class="w-full bg-blue-500 text-white rounded-md py-2 mb-3 border-2 border-gray-800 hover:bg-blue-700 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-opacity-50"
+                            id="manageAllFiles">管理所有檔案</button>
                     </div>
 
                 </div>
@@ -102,8 +105,13 @@
 </body>
 <script>
     const makeEvalFiles_El = document.getElementById('makeEvalFiles');
-    makeEvalFiles_El.addEventListener('click', function(event) {
+    makeEvalFiles_El.addEventListener('click', function (event) {
         eel.switchPage('file_managerPage');
     });
+    const manageAllFiles_El = document.getElementById('manageAllFiles');
+    manageAllFiles_El.addEventListener('click', function (event) {
+        eel.switchPage('allFiles');
+    });
 </script>
+
 </html>
