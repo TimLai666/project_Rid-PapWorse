@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 20px;
+            min-width: 80%;
+            /* max-width: 600px; */
+        }
+
+        .editor-container,
+        #table-container,
+        .radio-group {
+            margin-bottom: 20px;
+        }
+
+        .file-input,
+        .table-input,
+        textarea,
+        .image-input {
+            min-width: 90%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            min-height: 200px;
+        }
+
+        .save-btn {
+            width: 100%;
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .save-btn:hover {
+            background-color: #003d82;
+        }
+
+        .radio-group label {
+            margin-right: 15px;
+            font-size: 16px;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
+
+        textarea {
+            height: 100px;
+            /*Adjust the height of textarea*/
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar-placeholder" style="display: block;"></div>
+    <script src="loadNavBar.js"></script>
+    <div style="padding: 20px;
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;">
+        <div class="container">
+            <div class="editor-container">
+                <div class="radio-group">
+                    <label>
+                        <input type="radio" name="editMode" value="import" checked> 导入文件
+                    </label>
+                    <label>
+                        <input type="radio" name="editMode" value="table"> 表格编辑
+                    </label>
+                </div>
+                <input type="file" id="file-input" class="file-input" />
+            </div>
+            <div id="table-container"></div>
+            <button id="save-btn" class="save-btn">保存</button>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const fileInput = document.getElementById('file-input');
+            const saveButton = document.getElementById('save-btn');
+            const tableContainer = document.getElementById('table-container');
+            const editModeRadios = document.querySelectorAll('input[name="editMode"]');
+
+            function generateTableEditor() {
+                const table = document.createElement('table');
+                const tbody = document.createElement('tbody');
+                table.appendChild(tbody);
+
+                // 文本输入
+                const trText = document.createElement('tr');
+                const tdLabelText = document.createElement('td');
+                tdLabelText.textContent = "详细描述";
+                const tdInputText = document.createElement('td');
+                const textarea = document.createElement('textarea');
+                tdInputText.appendChild(textarea);
+                trText.appendChild(tdLabelText);
+                trText.appendChild(tdInputText);
+
+                // 图片输入
+                const trImage = document.createElement('tr');
+                const tdLabelImage = document.createElement('td');
+                tdLabelImage.textContent = "导入图片";
+                const tdInputImage = document.createElement('td');
+                const imageInput = document.createElement('input');
+                imageInput.type = 'file';
+                imageInput.accept = 'image/*'; // Accept only images
+                tdInputImage.appendChild(imageInput);
+                trImage.appendChild(tdLabelImage);
+                trImage.appendChild(tdInputImage);
+
+                tbody.appendChild(trText);
+                tbody.appendChild(trImage);
+
+                tableContainer.innerHTML = ''; // Clear existing content
+                tableContainer.appendChild(table); // Add new table
+            }
+
+            function updateEditingMode() {
+                const selectedMode = document.querySelector('input[name="editMode"]:checked').value;
+                if (selectedMode === 'import') {
+                    fileInput.disabled = false;
+                    tableContainer.innerHTML = ''; // Clear table
+                } else if (selectedMode === 'table') {
+                    fileInput.value = ''; // Clear uploaded file
+                    fileInput.disabled = true; // Disable file upload
+                    generateTableEditor(); // Generate table editor
+                }
+            }
+
+            editModeRadios.forEach(radio => {
+                radio.addEventListener('change', updateEditingMode);
+            });
+
+            updateEditingMode();
+
+            saveButton.addEventListener('click', function () {
+                // Implement save logic here
+                alert('Implement save logic');
+            });
+        });
+    </script>
+</body>
+
+</html>
