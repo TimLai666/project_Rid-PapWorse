@@ -7,15 +7,15 @@
 
 <body style="width: 100vw;height: 100vh;margin: 0;padding: 0;">
     <iframe id="frame" src="start.html" width="100%" height="100%"></iframe>
-    <script type="text/javascript" src="/eel.js"></script> <!-- Eel的JavaScript库 -->
+    <script type="text/javascript" src="/paling.js"></script> <!-- paling的JavaScript库 -->
     <script>
-        eel.expose(switchPage);  // 让这个函数可以被Python调用
+        paling.expose(switchPage);  // 让这个函数可以被Python调用
         function switchPage(pageName) {
             document.getElementById('frame').src = pageName + ".html";
         }
 
         window.onload = function () {
-            eel.page_ready(); // 告诉Python页面已加载完毕
+            paling.page_ready(); // 告诉Python页面已加载完毕
         }
 
     </script>
