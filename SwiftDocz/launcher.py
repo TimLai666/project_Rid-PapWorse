@@ -14,7 +14,7 @@ def page_ready():
     
 # switchPage('home')
 
-eel.start('main.html', size=(1920, 1080), port=5349)  # 启动应用，打开`main.html`
+eel.start('main.html', size=(1910, 1080), port=5349)  # 启动应用，打开`main.html`
 
 
 # mac 要使用 python 3.10
