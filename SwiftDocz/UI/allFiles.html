@@ -61,6 +61,38 @@
             background-color: #555;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
         }
+
+        button.delete {
+            background-color: crimson;
+        }
+
+        button.delete:hover {
+            background-color: rgb(218, 77, 106);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .custom-scrollbar {
+            overflow-y: scroll;
+            max-height: 600px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 20px;
+            border: 3px solid #f1f1f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
     </style>
 </head>
 
@@ -70,25 +102,70 @@
 
     <section style="display: flex;
     justify-content: center;align-items: center;height: 90%;">
-        <div class="file-manager">
+        <div class="file-manager" style="overflow: hidden; height: 500px;padding-bottom: 30px;">
             <h1 style="text-align: center;">所有檔案</h1>
             <button
                 style="width: 100%;margin-bottom: 10px;font-size: large;background-color: rgb(59 130 246);">新增</button>
-            <ul>
-                <li>
-                    <span>document.pdf</span>
-                    <button>編輯</button>
-                    <button>刪除</button>
-                </li>
-                <li>
-                    <span>image.png</span>
-                    <button>編輯</button>
-                </li>
-                <li>
-                    <span>presentation.pptx</span>
-                    <button>編輯</button>
-                </li>
-            </ul>
+                <div class="custom-scrollbar" style="height: 400px">
+                    <ul>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                        <li>
+                            <span>document.pdf</span>
+                            <button class="edit">編輯</button>
+                            <button class="delete">刪除</button>
+                        </li>
+                    </ul>
+                </div>
+            
         </div>
     </section>
 

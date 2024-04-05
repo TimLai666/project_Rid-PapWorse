@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>文件管理器</title>
+    <style>
+        #file-manager {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+            border: 1px solid #ccc;
+            min-height: 200px;
+        }
+
+        .file, .folder {
+            margin: 10px;
+            padding: 20px;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            width: 100px;
+            text-align: center;
+        }
+
+        .draggable {
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+
+<div id="file-manager">
+    <div class="folder draggable" draggable="true" id="folder1">資料夾1</div>
+    <div class="file draggable" draggable="true" id="file1">檔案1</div>
+    <div class="file draggable" draggable="true" id="file2">檔案2</div>
+</div>
+
+<script>
+    const fileManager = document.getElementById('file-manager');
+    let draggedItem = null;
+
+    document.querySelectorAll('.draggable').forEach(item => {
+        item.addEventListener('dragstart', (e) => {
+            draggedItem = item;
+            e.dataTransfer.setData('text/plain', item.id);
+        });
+
+        item.addEventListener('dragend', () => {
+            draggedItem = null;
+        });
+    });
+
+    fileManager.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+
+    fileManager.addEventListener('drop', (e) => {
+        e.preventDefault();
+        if (draggedItem && e.target.classList.contains('folder')) {
+            e.target.appendChild(draggedItem);
+        } else if (draggedItem) {
+            fileManager.appendChild(draggedItem);
+        }
+    });
+</script>
+</body>
+</html>
