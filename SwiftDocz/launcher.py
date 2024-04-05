@@ -17,7 +17,6 @@ def page_ready():
 paling.start('main.html', size=(1910, 1080), port=5349)  # 启动应用，打开`main.html`
 
 
-# windows 要使用 python 3.11
 
 # 打包命令
 # pyinstaller --add-data 'UI:UI' launcher.py
