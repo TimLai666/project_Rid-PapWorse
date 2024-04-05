@@ -1,23 +1,109 @@
 <!DOCTYPE html>
-<html style="width: 100vw;height: 100vh;margin: 0;padding: 0;">
+<html style="width: 100vw; height: 100vh; margin: 0; padding: 0; overflow: hidden;">
 
 <head>
     <title>SwiftDocz</title>
+    <style>
+        body {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+        }
+
+        #mainContent {
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        #frame {
+            flex-grow: 1;
+        }
+
+        #sidebar {
+            width: 200px;
+            /* 默认宽度 */
+            background-color: white;
+            transition: width 0.5s;
+            /* 平滑过渡动画 */
+            overflow: hidden;
+            /* 隐藏溢出内容 */
+        }
+
+        #sidebar.collapsed {
+            width: 0;
+            /* 收起时宽度 */
+        }
+
+        #toggleButton {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            min-width: 30px;
+            height: 28px;
+            padding: 0 7px;
+            top: 12px;
+            right: 30px;
+            cursor: pointer;
+            background-color:beige;
+        }
+
+        button:hover {
+            background-color: rgb(255, 191, 107);
+            cursor: pointer; 
+        }
+    </style>
 </head>
 
-<body style="width: 100vw;height: 100vh;margin: 0;padding: 0;">
-    <iframe id="frame" src="start.html" width="100%" height="100%"></iframe>
-    <script type="text/javascript" src="/paling.js"></script> <!-- paling的JavaScript库 -->
+<body>
+    <div id="toggleButton" style="font-weight: 600;">✕ 收合</div>
+    <main id="mainContent">
+        <iframe id="frame" src="start.html" height="100%"></iframe>
+        <aside id="sidebar">
+            <div
+                style="height: 150px; display: flex;flex-direction: column; align-items: center; justify-content: center; background-color: rgb(255, 168, 121);">
+                <h3>工具列</h3>
+            </div>
+            <button onclick="switchPage('start')" style="width: 100%; height: 100px;border-left: 0px; border-right: 0px;">
+                <h2>回首頁選單</h2>
+            </button>
+            <div id="dateTime" style="text-align: center;font-size: large; font-weight: bold;margin-top: 20px;">日期與時間</div>
+        </aside>
+    </main>
+
+    <script type="text/javascript" src="/paling.js"></script>
     <script>
-        paling.expose(switchPage);  // 让这个函数可以被Python调用
+        paling.expose(switchPage);
         function switchPage(pageName) {
             document.getElementById('frame').src = pageName + ".html";
         }
 
         window.onload = function () {
-            paling.page_ready(); // 告诉Python页面已加载完毕
+            paling.page_ready();
+            updateDateTime(); // 更新日期时间
         }
 
+        document.getElementById('toggleButton').onclick = function () {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('collapsed');
+            this.textContent = sidebar.classList.contains('collapsed') ? '展開工具列 ☰' : '✕ 收合';
+        };
+
+        function updateDateTime() {
+            const dateTimeElement = document.getElementById('dateTime');
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = now.getMonth() + 1;
+            const day = now.getDay();
+            const date = year + "年" + month + "月" + day + "日";
+            const time = now.toLocaleTimeString();
+            dateTimeElement.innerHTML = "現在時間：" + "<br>" + date + "<br>" + time;
+        }
+
+        setInterval(updateDateTime, 200); // 每0.2秒更新时间
     </script>
 </body>
 

@@ -29,7 +29,7 @@
                         <button type="button"
                             class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-gray-500"
                             id="menu-button" aria-expanded="true" aria-haspopup="true">
-                            選擇哪一屆的資料？
+                            <p>選擇哪一屆的資料？</p>
                             <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
                                 fill="currentColor" aria-hidden="true">
                                 <path fill-rule="evenodd"
@@ -38,16 +38,12 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
-                        role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
-                        style="display: none;">
+                    <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1"
+                    style="display: none;">
                         <div class="py-1" role="none">
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
-                                tabindex="-1" id="menu-item-0">選項一</a>
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
-                                tabindex="-1" id="menu-item-1">選項二</a>
-                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"
-                                tabindex="-1" id="menu-item-2">選項三</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-0">選項一</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-1">選項二</a>
+                            <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" tabindex="-1" id="menu-item-2">選項三</a>
                         </div>
                     </div>
                 </div>
@@ -103,6 +99,34 @@
     <script type="text/javascript" src="/paling.js"></script>
 </body>
 <script>
+    document.getElementById('menu-button').addEventListener('click', function(event) {
+        // 切換下拉菜單的顯示狀態
+        const dropdownMenu = document.querySelector('.origin-top-right');
+        if (dropdownMenu.style.display === 'block') {
+            dropdownMenu.style.display = 'none';
+        } else {
+            dropdownMenu.style.display = 'block';
+        }
+    });
+
+    // 定義一個變數來存儲選擇的選項值
+    let selectedOptionValue = '';
+
+    // 為每個選項添加點擊事件監聽器
+    document.querySelectorAll('[role="menuitem"]').forEach(item => {
+        item.addEventListener('click', function(event) {
+            // 防止點擊事件導致的頁面跳轉
+            event.preventDefault();
+
+            // 更新變數值為被點擊選項的內容
+            selectedOptionValue = this.textContent;
+            document.getElementById('menu-button').getElementsByTagName('p')[0].innerText = selectedOptionValue;
+
+            // 可以在這裡做其他事情，比如關閉下拉菜單
+            document.querySelector('.origin-top-right').style.display = 'none';
+        });
+    });
+
     const makeEvalFiles_El = document.getElementById('makeEvalFiles');
     makeEvalFiles_El.addEventListener('click', function (event) {
         paling.switchPage('file_managerPage');
