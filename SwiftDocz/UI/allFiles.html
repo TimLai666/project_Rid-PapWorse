@@ -35,13 +35,30 @@
         }
 
         .file-manager ul li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background-color: rgba(0, 0, 0, 0.06);
             margin-bottom: 10px;
             padding: 10px;
             border-radius: 5px;
+        }
+
+        .actions {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: flex-end;
+            /* 使元素靠右对齐 */
+        }
+
+        .file-manager ul li span {
+            flex-shrink: 0;
+            /* 防止文件名缩小 */
+        }
+
+        .file-manager li button {
+            margin-left: 10px;
+            /* 在按钮之间添加一些空间 */
         }
 
         .file-manager ul li:last-child {
@@ -106,9 +123,9 @@
             <h1 style="text-align: center;">所有檔案</h1>
             <button
                 style="width: 100%;margin-bottom: 10px;font-size: large;background-color: rgb(59 130 246);">新增</button>
-                <div class="custom-scrollbar" style="height: 400px;padding-right: 10px;">
-                    <ul>
-                        <!-- <li>
+            <div class="custom-scrollbar" style="height: 400px;padding-right: 10px;">
+                <ul>
+                    <!-- <li>
                             <span>document.pdf</span>
                             <span class="status">✅已完成</span>
                             <button class="edit">編輯</button>
@@ -120,48 +137,68 @@
                             <button class="edit">編輯</button>
                             <button class="delete">刪除</button>
                         </li> -->
-                    </ul>
-                </div>
-            
+                </ul>
+            </div>
+
         </div>
     </section>
 </body>
 <script>
-// 自動帶入檔案列及狀態
-// 點編輯按鈕就跳到該檔案的編輯頁
-// 點刪除按鈕要alert確定刪除?
-document.addEventListener('DOMContentLoaded', function() {
-    const fileData = [
-        { name: 'document1.pdf', status: '✅已完成' },
-        { name: 'document2.pdf', status: '❌待完成' }
-    ];
+    // 自動帶入檔案列及狀態
+    // 點編輯按鈕就跳到該檔案的編輯頁
+    // 點刪除按鈕要alert確定刪除?
+    document.addEventListener('DOMContentLoaded', function () {
+        const fileData = [
+            { name: 'document1.pdf', status: '✅已完成' },
+            { name: 'document2.pdf', status: '❌待完成' }
+        ];
 
-    const fileList = document.querySelector('.custom-scrollbar ul');
+        const fileList = document.querySelector('.custom-scrollbar ul');
+        const addButton = document.querySelector('button'); // 假设页面上只有一个按钮
 
-    // 功能1: 自动带入文件列表及状态
-    fileData.forEach((file, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-            <span>${file.name}</span>
-            <span class="status">${file.status}</span>
-            <button class="edit">編輯</button>
-            <button class="delete">刪除</button>
-        `;
-        fileList.appendChild(li);
-
-        // 功能2: 点击编辑按钮
-        li.querySelector('.edit').addEventListener('click', function() {
-            alert('跳转到编辑页面: ' + file.name);
+        // 功能1: 自动带入文件列表及状态
+        fileData.forEach(file => {
+            addFileToList(file);
         });
 
-        // 功能3: 点击删除按钮弹出确认对话框
-        li.querySelector('.delete').addEventListener('click', function() {
-            if (confirm('確定刪除 ' + file.name + ' ？')) {
-                fileList.removeChild(li);
+        // 功能4: 点击新增按钮时弹出对话框
+        addButton.addEventListener('click', function () {
+            const fileName = prompt('請輸入檔名:');
+            if (fileName) { // 确保用户输入了内容
+                const newFile = { name: fileName, status: '❌待完成' };
+                addFileToList(newFile);
+                fileData.push(newFile); // 可选，如果你需要在数组中也保存这个数据
             }
         });
+
+        // 将文件添加到列表的函数
+        function addFileToList(file) {
+            const li = document.createElement('li');
+            li.innerHTML = `
+            <span>${file.name}</span>
+            <div class="action">
+                <span class="status">${file.status}</span>
+                <button class="edit">編輯 / 上傳</button>
+                <button class="delete">刪除</button>
+            </div>
+        `;
+            fileList.appendChild(li);
+
+            // 功能2: 点击编辑按钮
+            li.querySelector('.edit').addEventListener('click', function () {
+                alert('跳转到编辑页面: ' + file.name);
+            });
+
+            // 功能3: 点击删除按钮弹出确认对话框
+            li.querySelector('.delete').addEventListener('click', function () {
+                if (confirm('確定刪除 ' + file.name + ' ？')) {
+                    fileList.removeChild(li);
+                }
+            });
+        }
     });
-});
+
 
 </script>
+
 </html>
