@@ -106,69 +106,62 @@
             <h1 style="text-align: center;">所有檔案</h1>
             <button
                 style="width: 100%;margin-bottom: 10px;font-size: large;background-color: rgb(59 130 246);">新增</button>
-                <div class="custom-scrollbar" style="height: 400px">
+                <div class="custom-scrollbar" style="height: 400px;padding-right: 10px;">
                     <ul>
-                        <li>
+                        <!-- <li>
                             <span>document.pdf</span>
+                            <span class="status">✅已完成</span>
                             <button class="edit">編輯</button>
                             <button class="delete">刪除</button>
                         </li>
                         <li>
                             <span>document.pdf</span>
+                            <span class="status">❌待完成</span>
                             <button class="edit">編輯</button>
                             <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
-                        <li>
-                            <span>document.pdf</span>
-                            <button class="edit">編輯</button>
-                            <button class="delete">刪除</button>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             
         </div>
     </section>
-
 </body>
+<script>
+// 自動帶入檔案列及狀態
+// 點編輯按鈕就跳到該檔案的編輯頁
+// 點刪除按鈕要alert確定刪除?
+document.addEventListener('DOMContentLoaded', function() {
+    const fileData = [
+        { name: 'document1.pdf', status: '✅已完成' },
+        { name: 'document2.pdf', status: '❌待完成' }
+    ];
 
+    const fileList = document.querySelector('.custom-scrollbar ul');
+
+    // 功能1: 自动带入文件列表及状态
+    fileData.forEach((file, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span>${file.name}</span>
+            <span class="status">${file.status}</span>
+            <button class="edit">編輯</button>
+            <button class="delete">刪除</button>
+        `;
+        fileList.appendChild(li);
+
+        // 功能2: 点击编辑按钮
+        li.querySelector('.edit').addEventListener('click', function() {
+            alert('跳转到编辑页面: ' + file.name);
+        });
+
+        // 功能3: 点击删除按钮弹出确认对话框
+        li.querySelector('.delete').addEventListener('click', function() {
+            if (confirm('確定刪除 ' + file.name + ' ？')) {
+                fileList.removeChild(li);
+            }
+        });
+    });
+});
+
+</script>
 </html>
