@@ -19,6 +19,20 @@ def set_account(value: str):
     pass
 
 @paling.expose
+def what_to_input(type: str) -> list[dict[str, str]]:
+    match type:
+        case 'createClubInfo':
+            # 從資料庫決定要輸入什麼
+            return [{
+                '社團名稱': 'text',
+                'detailDescription': 'textarea',
+                'importImage': 'file',
+            }, {
+                # 預填的值
+            }]
+
+    
+@paling.expose
 def page_ready() -> None:
     # 程式ui打開後會立即執行
     pass
