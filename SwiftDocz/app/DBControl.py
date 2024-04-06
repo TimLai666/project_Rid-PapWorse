@@ -137,18 +137,18 @@ def init_db(tables: dict[str, list[dict, dict]]) -> None:
     update_db(tables)
 
     # 创建一个触发器来自动更新 Games 表的 highest_score 字段
-    create_trigger(
-        trigger_name="UpdateHighestScoreAndHolder",
-        action="AFTER INSERT",
-        table_name="GamePlayingRecords",
-        triggering_event="NEW.score > (SELECT highest_score FROM Games WHERE name = NEW.game_name)",
-        sql_operation="""
-        UPDATE Games
-        SET highest_score = NEW.score,
-            achievement_holder = NEW.user_uuid
-        WHERE name = NEW.game_name
-        """
-    )
+    # create_trigger(
+    #     trigger_name="UpdateHighestScoreAndHolder",
+    #     action="AFTER INSERT",
+    #     table_name="GamePlayingRecords",
+    #     triggering_event="NEW.score > (SELECT highest_score FROM Games WHERE name = NEW.game_name)",
+    #     sql_operation="""
+    #     UPDATE Games
+    #     SET highest_score = NEW.score,
+    #         achievement_holder = NEW.user_uuid
+    #     WHERE name = NEW.game_name
+    #     """
+    # )
 
 # updating_tables: dict[表名, 結構]
 def update_db(updating_tables: dict[str, list]):
@@ -170,7 +170,3 @@ def drop_triggers():
     if triggers:
         for trigger in triggers:
             do_database_operations(f"DROP TRIGGER IF EXISTS {trigger['name']};")
-
-def backup_database():
-    db_backup(database_paths)
-    time.sleep(86400)  # 每天更新一次
