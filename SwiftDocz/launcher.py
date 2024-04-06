@@ -1,7 +1,8 @@
 import paling
 import time
+from pathlib import Path
 
-DATA_ROOT_DIR = ""
+DATA_ROOT_DIR = Path("./data")
 
 paling.init('UI')  # 假设您的HTML/CSS/JavaScript文件都放在`web`目录下
 
@@ -11,10 +12,11 @@ def switchPage(page: str) -> None:
 
 @paling.expose
 def set_account(value: str):
-    global DATA_ROOT_DIR
     # 查詢資料庫
     # 用屆數當資料夾名稱
-    # DATA_ROOT_DIR = 
+    # gen
+    # dir_path = DATA_ROOT_DIR / Path(gen)
+    pass
 
 @paling.expose
 def page_ready() -> None:

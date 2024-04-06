@@ -3,7 +3,7 @@ import time
 
 # 資料庫路徑
 database_paths = {
-    'main': '../data/database.db' 
+    'main': '../data/database.db'
 }
 
 def do_database_operations(sql_statement: str, database: str = 'main', placeholders_mode: bool = False, values_tuple: tuple = None, query_mode: bool = False, fk_mode: bool = True, return_as_dict: bool = False) -> (list[any] | None):
