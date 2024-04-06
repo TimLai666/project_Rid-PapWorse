@@ -126,19 +126,16 @@
             <button id="save-btn" class="save-btn">保存</button>
         </div>
     </div>
+    <script type="text/javascript" src="/paling.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', async function () {
             const saveButton = document.getElementById('save-btn');
             const tableContainer = document.getElementById('table-container');
 
-            const inputFields = {
-                '社團名稱': 'text',
-                'detailDescription': 'textarea',  // 详细描述
-                'importImage': 'file',  // 导入图片
-                // 可以根据需要添加更多字段
-            };
+            const inputFields = await paling.what_to_input('createClubInfo')();
+            
 
-            generateTableEditor(inputFields);
+            generateTableEditor(inputFields[0]);
 
             function generateTableEditor(fields) {
                 const table = document.createElement('table');
