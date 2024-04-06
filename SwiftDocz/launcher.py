@@ -29,6 +29,7 @@ def what_to_input(type: str) -> list[dict[str, str]]:
                 'importImage': 'file',
             }, {
                 # 預填的值
+                '社團名稱': 'TODO: 從資料庫取得',
             }]
 
     
