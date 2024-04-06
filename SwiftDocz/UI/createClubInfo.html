@@ -133,9 +133,10 @@
             const tableContainer = document.getElementById('table-container');
 
             const inputFields = await paling.what_to_input('createClubInfo')();
-            
+
 
             generateTableEditor(inputFields[0]);
+            insertDefaultValue(inputFields[1])
 
             function generateTableEditor(fields) {
                 const table = document.createElement('table');
@@ -171,6 +172,22 @@
 
                 tableContainer.innerHTML = '';
                 tableContainer.appendChild(table);
+            }
+
+            function insertDefaultValue(defaultValues) {
+                const formData = {};
+                // 使用 querySelectorAll 遍历每个带有 name 属性的输入元素
+                document.querySelectorAll('[name]').forEach(input => {
+                    const key = input.name; // 获取字段名
+                    let value;
+                    if (input.type === 'file') {
+                        // TODO: 圖片的處理
+                    } else {
+                        if (defaultValues[input.name]) {
+                            input.value = defaultValues[input.name];
+                        }
+                    }
+                });
             }
 
             saveButton.addEventListener('click', function () {
