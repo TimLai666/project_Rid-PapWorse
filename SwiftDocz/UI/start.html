@@ -127,6 +127,11 @@
         });
     });
 
+    const createNew_El = document.getElementById('createNew');
+    createNew_El.addEventListener('click', function (event) {
+        paling.switchPage('createClubInfo');
+    });
+
     const makeEvalFiles_El = document.getElementById('makeEvalFiles');
     makeEvalFiles_El.addEventListener('click', function (event) {
         SetAccountAndSwitchPage('file_managerPage');
