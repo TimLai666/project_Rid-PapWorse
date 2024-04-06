@@ -110,7 +110,7 @@
     });
 
     // 定義一個變數來存儲選擇的選項值
-    let selectedOptionValue = '';
+    let selectedOptionValue;
 
     // 為每個選項添加點擊事件監聽器
     document.querySelectorAll('[role="menuitem"]').forEach(item => {
@@ -129,12 +129,22 @@
 
     const makeEvalFiles_El = document.getElementById('makeEvalFiles');
     makeEvalFiles_El.addEventListener('click', function (event) {
-        paling.switchPage('file_managerPage');
+        SetAccountAndSwitchPage('file_managerPage');
     });
+    
     const manageAllFiles_El = document.getElementById('manageAllFiles');
     manageAllFiles_El.addEventListener('click', function (event) {
-        paling.switchPage('allFiles');
+        SetAccountAndSwitchPage('allFiles');
     });
+
+    function SetAccountAndSwitchPage(page) {
+        if (selectedOptionValue) {
+            paling.set_account(selectedOptionValue);
+            paling.switchPage(page)
+        } else {
+            alert("請先選擇第幾屆！")
+        }
+    }
 </script>
 
 </html>

@@ -1,14 +1,23 @@
 import paling
 import time
 
+DATA_ROOT_DIR = ""
+
 paling.init('UI')  # 假设您的HTML/CSS/JavaScript文件都放在`web`目录下
 
 @paling.expose
-def switchPage(page: str):
+def switchPage(page: str) -> None:
     paling.switchPage(page)
 
 @paling.expose
-def page_ready():
+def set_account(value: str):
+    global DATA_ROOT_DIR
+    # 查詢資料庫
+    # 用屆數當資料夾名稱
+    # DATA_ROOT_DIR = 
+
+@paling.expose
+def page_ready() -> None:
     # 程式ui打開後會立即執行
     pass
     
