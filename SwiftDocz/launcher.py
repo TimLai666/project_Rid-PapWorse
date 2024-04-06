@@ -1,10 +1,13 @@
 import paling
 import time
 from pathlib import Path
+import app.app
 
 DATA_ROOT_DIR = Path("./data")
 
 paling.init('UI')  # 假设您的HTML/CSS/JavaScript文件都放在`web`目录下
+
+app.app.app_init()
 
 @paling.expose
 def switchPage(page: str) -> None:

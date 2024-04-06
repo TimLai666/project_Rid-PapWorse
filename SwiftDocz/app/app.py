@@ -1,5 +1,5 @@
 # 主要程式邏輯之所在
-from DBControl import init_db
+from .DBControl import init_db
 
 # 在 launcher.py 中 import 這個函數
 def app_init():
@@ -20,8 +20,26 @@ def app_init():
             '資訊長': 'TEXT',
             '攝影長': 'TEXT',
         }, {
-        #     無外來鍵
+            # 無外來鍵
         }],
+
+        'Phone': [{
+            '屆': 'INT PRIMARY KEY',
+            '指導老師': 'TEXT',
+            '社長': 'TEXT',
+            '副社長': 'TEXT',
+            '文書長': 'TEXT',
+            '美宣長': 'TEXT',
+            '教學長': 'TEXT',
+            '公關長': 'TEXT',
+            '器材長': 'TEXT',
+            '總務長': 'TEXT',
+            '活動長': 'TEXT',
+            '資訊長': 'TEXT',
+            '攝影長': 'TEXT',
+        }, {
+            '屆': '每屆社團資料(屆)',
+        }]
 
     #     'table1': [{
     #         '屬性1': '資料型態1 PRIMARY KEY',

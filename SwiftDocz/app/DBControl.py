@@ -1,13 +1,18 @@
 import sqlite3
 import time
+from pathlib import Path
 
 # 資料庫路徑
 database_paths = {
-    'main': '../data/database.db'
+    'main': Path('./data/database.db')
 }
 
 def do_database_operations(sql_statement: str, database: str = 'main', placeholders_mode: bool = False, values_tuple: tuple = None, query_mode: bool = False, fk_mode: bool = True, return_as_dict: bool = False) -> (list[any] | None):
     # 使用 sqlite3 連接數據庫
+    # 如果資料庫不存在就自動建立.db檔
+    if not database_paths[database].exists():
+        database_paths[database].parent.mkdir(parents=True, exist_ok=True)
+        database_paths[database].touch()
     with sqlite3.connect(database_paths[database]) as conn:
         if fk_mode:
             conn.execute("PRAGMA foreign_keys = ON;")

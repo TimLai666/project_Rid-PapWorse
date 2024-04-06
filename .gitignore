@@ -4,3 +4,4 @@ dist
 *.spec
 /SwiftDocz/app/__pycache__
 ._README.md
+/SwiftDocz/data
