@@ -25,6 +25,8 @@ def what_to_input(type: str) -> list[dict[str, str]]:
             # 從資料庫決定要輸入什麼
             return [{
                 '社團名稱': 'text',
+                '第幾屆': 'number',
+                '指導老師': 'text',
                 'detailDescription': 'textarea',
                 'importImage': 'file',
             }, {

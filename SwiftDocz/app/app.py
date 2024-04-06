@@ -2,11 +2,12 @@
 from DBControl import init_db
 
 # 在 launcher.py 中 import 這個函數
-def app():
+def app_init():
     # 初始化資料庫，若有變更將自動更新，原有資料不受影響
     init_db({
         '每屆社團資料': [{
-            'Gen': 'INT PRIMARY KEY',
+            '屆': 'INT PRIMARY KEY',
+            '指導老師': 'TEXT',
             '社長': 'TEXT',
             '副社長': 'TEXT',
         }, {
