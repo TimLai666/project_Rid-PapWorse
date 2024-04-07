@@ -32,14 +32,14 @@ jobs:
         pip install paling
         pip install -r requirements.txt
 
-    - name: Run Python script for 10 seconds
+    - name: Run Python script for 3 seconds
       run: |
         if [[ "${{ runner.os }}" == "Windows" ]]; then
           $process = Start-Process python -ArgumentList 'SwiftDocz/launcher.py' -PassThru
-          Start-Sleep -Seconds 10
+          Start-Sleep -Seconds 3
           Stop-Process -Id $process.Id
         else
-          timeout 10 python SwiftDocz/launcher.py
+          timeout 3 python SwiftDocz/launcher.py
         fi
       shell: bash
   
