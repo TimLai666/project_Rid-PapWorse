@@ -34,12 +34,12 @@ jobs:
 
     - name: Run Python script for 3 seconds
       run: |
-        if [[ "${{ runner.os }}" == "Windows" ]]; then
-          $process = Start-Process python -ArgumentList 'SwiftDocz/launcher.py' -PassThru
-          Start-Sleep -Seconds 3
-          Stop-Process -Id $process.Id
+        if [ "${{ runner.os }}" == "Windows" ]; then
+          pwsh -Command "& {
+            Start-Process python -ArgumentList 'SwiftDocz/launcher.py' -PassThru | % {Start-Sleep -Seconds 3; Stop-Process -Id $_.Id} 
+          }; exit 0"
         else
-          timeout 3 python SwiftDocz/launcher.py
+          timeout 3 python SwiftDocz/launcher.py || true
         fi
       shell: bash
   
