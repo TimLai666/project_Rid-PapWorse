@@ -35,7 +35,7 @@ jobs:
     - name: Run Python script for 10 seconds
       run: |
         if ($env:RUNNER_OS -eq "Windows") {
-          $process = Start-Process python -ArgumentList 'your_script.py' -PassThru
+          $process = Start-Process python -ArgumentList 'SwiftDocz/launcher.py' -PassThru
           Start-Sleep -Seconds 10
           Stop-Process -Id $process.Id
         } else {
