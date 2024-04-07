@@ -31,6 +31,9 @@ jobs:
         pip install pyinstaller
         pip install paling
         pip install -r requirements.txt
+
+    - name: Run app
+      run: python SwiftDocz/launcher.py
   
     - name: Build Executable
       run: |
