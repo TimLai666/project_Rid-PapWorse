@@ -39,7 +39,7 @@ jobs:
           Start-Sleep -Seconds 10
           Stop-Process -Id $process.Id
         } else {
-          timeout 10 python your_script.py
+          timeout 10 python SwiftDocz/launcher.py
         }
       shell: pwsh
   
