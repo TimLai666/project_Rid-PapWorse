@@ -23,7 +23,7 @@ jobs:
       run: pip install pipreqs
 
     - name: Generate requirements.txt
-      run: pipreqs ./ --force
+      run: pipreqs ./SwiftDocz/app --force
 
     - name: Install Dependencies
       run: |
