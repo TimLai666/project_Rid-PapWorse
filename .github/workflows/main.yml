@@ -34,13 +34,13 @@ jobs:
 
     - name: Run Python script for 10 seconds
       run: |
-        if [[ "${{ runner.os }}" = "Windows" ]]; then
+        if ($env:RUNNER_OS -eq "Windows") {
           $process = Start-Process python -ArgumentList 'your_script.py' -PassThru
           Start-Sleep -Seconds 10
           Stop-Process -Id $process.Id
-        else
+        } else {
           timeout 10 python your_script.py
-        fi
+        }
       shell: pwsh
   
     - name: Build Executable
