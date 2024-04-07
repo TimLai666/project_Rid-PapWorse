@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.0/css/jquery.dataTables.css" />
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.11.0/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            margin-bottom: 0;
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+        }
+
+        .table thead th {
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table tbody tr {
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .edit-delete-btns {
+            display: flex;
+            gap: 10px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="header d-flex justify-content-between align-items-center">
+            <h1>CRUD系統</h1>
+
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nameInput" class="form-label">姓名</label>
+                                <input type="text" class="form-control" id="nameInput" placeholder="請輸入姓名">
+                            </div>
+                            <div class="mb-3">
+                                <label for="emailInput" class="form-label">電子郵件</label>
+                                <input type="email" class="form-control" id="emailInput" placeholder="請輸入電子郵件">
+                            </div>
+                            <div class="mb-3">
+                                <label for="dateInput" class="form-label">生日</label>
+                                <input type="date" class="form-control" id="dateInput">
+                            </div>
+                            <button type="submit" class="btn btn-primary" 　class="fas fa-save">儲存</button>
+                            <button type="button" class="btn btn-info update-btn" style="display: none;">更新</button>
+                            <button type="button" class="btn btn-secondary">取消</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-8">
+                <table class="table mt-4">
+                    <thead>
+                        <tr>
+                            <th scope="col">姓名</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">生日</th>
+                            <th scope="col">編輯／刪除</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>C w C</td>
+                            <td>cwc@gmail.com</td>
+                            <td>2001-01-27</td>
+                            <td class="edit-delete-btns">
+                                <button type="button" class="btn btn-warning btn-sm">編輯</button>
+                                <button type="button" class="btn btn-danger btn-sm">刪除</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>陳小明</td>
+                            <td>ming@gmail.com</td>
+                            <td>1999-11-12</td>
+                            <td class="edit-delete-btns">
+                                <button type="button" class="btn btn-warning btn-sm">編輯</button>
+                                <button type="button" class="btn btn-danger btn-sm">刪除</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>林大山</td>
+                            <td>mountain@gmail.com</td>
+                            <td>2001-08-21</td>
+                            <td class="edit-delete-btns">
+                                <button type="button" class="btn btn-warning btn-sm">編輯</button>
+                                <button type="button" class="btn btn-danger btn-sm">刪除</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        $(document).ready(function () {
+            var table = $('.table').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true
+            });
+
+            // 表單提交的事件監聽器（用於添加新條目）
+            $('form').on('submit', function (event) {
+                event.preventDefault();
+
+                let name = $('#nameInput').val().trim();
+                let email = $('#emailInput').val().trim();
+                let birthday = $('#dateInput').val().trim();
+
+                // 檢查是否有完全重複的資料
+                let isDuplicate = false;
+                table.rows().every(function () {
+                    let data = this.data(); // 獲取當前行的資料
+                    if (data[0] === name && data[1] === email && data[2] === birthday) {
+                        isDuplicate = true;
+                        return false; // 跳出迭代
+                    }
+                });
+
+                // 確認所有欄位都不是空的且無重複資料
+                if (name && email && birthday && !isDuplicate) {
+                    table.row.add([
+                        name,
+                        email,
+                        birthday,
+                        '<div class="edit-delete-btns"><button type="button" class="btn btn-warning btn-sm">編輯</button><button type="button" class="btn btn-danger btn-sm">刪除</button></div>'
+                    ]).draw(false);
+
+                    $('form')[0].reset(); // 重置表單
+                } else if (isDuplicate) {
+                    alert("不能新增重複的資料。");
+                } else {
+                    alert("請填寫所有欄位。");
+                }
+            });
+
+
+
+            /////////////////編輯
+            // 顯示編輯模式的函數
+            function showEditMode(row) {
+                var columns = row.children('td');
+
+                // 隱藏“保存更改”按鈕
+                $('button[type="submit"]').hide();
+
+                // 顯示“更新”按鈕
+                $('.update-btn').show();
+
+                // 使用行數據填充表單字段
+                $('#nameInput').val(columns.eq(0).text());
+                $('#emailInput').val(columns.eq(1).text());
+                $('#dateInput').val(columns.eq(2).text());
+            }
+
+            // 編輯按鈕的事件監聽器（包括新類）
+            $('.table').on('click', '.btn-warning', function () {
+                var row = $(this).closest('tr');
+                showEditMode(row);
+                // Mark the selected row
+                $('.table tr.selected').removeClass('selected');
+                row.addClass('selected');
+                // Retrieve and set data for the selected row
+                var rowData = table.row(row).data();
+                $('#nameInput').val(rowData[0]);
+                $('#emailInput').val(rowData[1]);
+                $('#dateInput').val(rowData[2]);
+                // Store the row data for update
+                $('.update-btn').data('row', rowData);
+            });
+
+            ///////////// 更新
+            // 更新按鈕的事件監聽器
+            $('.update-btn').on('click', function () {
+                var updatedData = [
+                    $('#nameInput').val(),
+                    $('#emailInput').val(),
+                    $('#dateInput').val(),
+                    '<div class="edit-delete-btns"><button type="button" class="btn btn-warning btn-sm">編輯</button><button type="button" class="btn btn-danger btn-sm">刪除</button></div>'
+                ];
+
+                var selectedRow = $('.table tr.selected');
+                if (selectedRow.length) {
+                    // Update the data for the selected row
+                    table.row(selectedRow).data(updatedData).draw();
+                    // 顯示成功消息
+                    alert('更新成功');
+                    // 清除表單數據
+                    $('form')[0].reset();
+                    // Clear selection
+                    selectedRow.removeClass('selected');
+                    // Reset stored row data
+                    $('.update-btn').removeData('row');
+                } else {
+                    alert('請選擇要更新的行');
+                }
+            });
+
+
+
+            ////////////////刪除
+            // “刪除”按鈕的事件監聽器
+            $('.table').on('click', '.btn-danger', function () {
+                if (confirm('確定刪除？')) {
+                    var row = $(this).closest('tr');
+                    table.row(row).remove().draw(false);
+                }
+            });
+
+
+            /////////////////取消
+            // “取消”按鈕的事件監聽器
+            $('button.btn-secondary').on('click', function () {
+                // 隱藏“更新”按鈕
+                $('.update-btn').hide();
+
+                // 顯示“保存更改”按鈕
+                $('button[type="submit"]').show();
+
+                // 清除表單數據
+                $('form')[0].reset();
+            });
+
+
+        });
+    </script>
+
+</body>
+</html>
