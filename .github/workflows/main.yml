@@ -41,7 +41,7 @@ jobs:
         else
           timeout 10 python SwiftDocz/launcher.py
         fi
-      shell: pwsh
+      shell: bash
   
     - name: Build Executable
       run: |
