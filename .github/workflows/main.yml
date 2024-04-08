@@ -46,9 +46,9 @@ jobs:
     - name: Build Executable
       run: |
         if [ "${{ runner.os }}" == "Windows" ]; then
-          pyinstaller -F --add-data 'UI;UI' --add-data 'app;app' launcher.py --name SwiftDocz-${{ runner.os }}
+          pyinstaller -F -windowed --add-data 'UI;UI' --add-data 'app;app' launcher.py --name SwiftDocz-${{ runner.os }}
         else
-          pyinstaller -F --add-data 'UI:UI' --add-data 'app:app' launcher.py --name SwiftDocz-${{ runner.os }}
+          pyinstaller -F -windowed --add-data 'UI:UI' --add-data 'app:app' launcher.py --name SwiftDocz-${{ runner.os }}
         fi
       shell: bash
       working-directory: ./SwiftDocz
