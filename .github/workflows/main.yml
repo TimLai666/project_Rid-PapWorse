@@ -46,7 +46,7 @@ jobs:
     - name: Build Executable
       run: |
         if [ "${{ runner.os }}" == "Windows" ]; then
-          python -m paling SwiftDocz/launcher.py SwiftDocz/UI --onefile --hidden-import=paling --add-data "SwiftDocz/app;app" --name SwiftDocz-${{ runner.os }}
+          python -m paling SwiftDocz/launcher.py SwiftDocz/UI --onefile --hidden-import=paling --add-data "SwiftDocz/app;app"
         else
           python -m paling SwiftDocz/launcher.py SwiftDocz/UI --onefile --windowed --hidden-import=paling --add-data "SwiftDocz/app:app" --add-data "SwiftDocz/UI:UI" --name SwiftDocz-${{ runner.os }}
         fi
