@@ -60,7 +60,7 @@ jobs:
 
     - name: Move Executable to SwiftDocz Output Folder
       run: |
-        mv dist/* output/SwiftDocz/
+        mv SwiftDocz/dist/* output/SwiftDocz/
 
     - name: Upload SwiftDocz Output Folder
       uses: actions/upload-artifact@v2
