@@ -29,7 +29,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pyinstaller
-        pip install paling
+        pip install eel
         pip install -r ./SwiftDocz/app/requirements.txt
 
     # - name: Run Python script for 3 seconds
@@ -46,9 +46,9 @@ jobs:
     - name: Build Executable
       run: |
         if [ "${{ runner.os }}" == "Windows" ]; then
-          python -m paling launcher.py UI --onefile --name SwiftDocz-${{ runner.os }}
+          pyinstaller launcher.py --add-data "UI;UI" --onefile --windowed --name SwiftDocz-${{ runner.os }}
         else
-          python -m paling launcher.py UI --onefile --windowed --add-data "UI:UI" --name SwiftDocz-${{ runner.os }}
+          pyinstaller launcher.py --add-data "UI:UI" --onefile --windowed --name SwiftDocz-${{ runner.os }}
         fi
       shell: bash
       working-directory: ./SwiftDocz
