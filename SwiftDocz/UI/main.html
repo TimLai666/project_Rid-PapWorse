@@ -75,15 +75,15 @@
         </aside>
     </main>
 
-    <script type="text/javascript" src="/paling.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
     <script>
-        paling.expose(switchPage);
+        eel.expose(switchPage);
         function switchPage(pageName) {
             document.getElementById('frame').src = pageName + ".html";
         }
 
         window.onload = function () {
-            paling.page_ready();
+            eel.page_ready();
             updateDateTime(); // 更新日期时间
         }
 

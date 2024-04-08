@@ -227,13 +227,13 @@
             <button id="save-btn" class="save-btn">保存</button>
         </div>
     </div>
-    <script type="text/javascript" src="/paling.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', async function () {
             const saveButton = document.getElementById('save-btn');
             const tableContainer = document.getElementById('table-container');
 
-            const inputFields = await paling.what_to_input('createClubInfo')();
+            const inputFields = await eel.what_to_input('createClubInfo')();
 
 
             generateTableEditor(inputFields[0]);
@@ -316,7 +316,7 @@
             const saveButton = document.getElementById('save-btn');
             const tableContainer = document.getElementById('table-container');
 
-            const inputFields = await paling.what_to_input('createClubInfo')();
+            const inputFields = await eel.what_to_input('createClubInfo')();
 
 
             generateTableEditor(inputFields[0]);

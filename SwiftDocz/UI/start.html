@@ -96,7 +96,7 @@
         </div>
 
     </div>
-    <script type="text/javascript" src="/paling.js"></script>
+    <script type="text/javascript" src="/eel.js"></script>
 </body>
 <script>
     document.getElementById('menu-button').addEventListener('click', function(event) {
@@ -129,7 +129,7 @@
 
     const createNew_El = document.getElementById('createNew');
     createNew_El.addEventListener('click', function (event) {
-        paling.switchPage('createClubInfo');
+        eel.switchPage('createClubInfo');
     });
 
     const makeEvalFiles_El = document.getElementById('makeEvalFiles');
@@ -144,8 +144,8 @@
 
     function SetAccountAndSwitchPage(page) {
         if (selectedOptionValue) {
-            paling.set_account(selectedOptionValue);
-            paling.switchPage(page)
+            eel.set_account(selectedOptionValue);
+            eel.switchPage(page)
         } else {
             alert("請先選擇第幾屆！")
         }

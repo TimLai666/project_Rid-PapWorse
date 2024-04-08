@@ -1,19 +1,19 @@
-import paling
+import eel
 import time
 from pathlib import Path
 import app.app
 
 DATA_ROOT_DIR = Path("./data")
 
-paling.init('UI')  # 假设您的HTML/CSS/JavaScript文件都放在`web`目录下
+eel.init('UI')  # 假设您的HTML/CSS/JavaScript文件都放在`web`目录下
 
 app.app.app_init()
 
-@paling.expose
+@eel.expose
 def switchPage(page: str) -> None:
-    paling.switchPage(page)
+    eel.switchPage(page)
 
-@paling.expose
+@eel.expose
 def set_account(value: str):
     # 查詢資料庫
     # 用屆數當資料夾名稱
@@ -21,7 +21,7 @@ def set_account(value: str):
     # dir_path = DATA_ROOT_DIR / Path(gen)
     pass
 
-@paling.expose
+@eel.expose
 def what_to_input(type: str) -> list[dict[str, str]]:
     match type:
         case 'createClubInfo':
@@ -38,14 +38,14 @@ def what_to_input(type: str) -> list[dict[str, str]]:
             }]
 
     
-@paling.expose
+@eel.expose
 def page_ready() -> None:
     # 程式ui打開後會立即執行
     pass
     
 # switchPage('home')
 
-paling.start('main.html', size=(1910, 1080), port=5349)  # 启动应用，打开`main.html`
+eel.start('main.html', size=(1910, 1080), port=5349)  # 启动应用，打开`main.html`
 
 
 
