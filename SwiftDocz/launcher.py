@@ -2,6 +2,11 @@ import eel
 import time
 from pathlib import Path
 import app.app
+import sys
+if hasattr(sys, "_MEIPASS"): # if the script is started from an executable file
+    with open("logs.txt", "a") as f_logs:
+        sys.stdout = f_logs
+        sys.stderr = f_logs
 
 DATA_ROOT_DIR = Path("./data")
 
