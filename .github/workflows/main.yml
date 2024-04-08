@@ -46,9 +46,9 @@ jobs:
     - name: Build Executable
       run: |
         if [ "${{ runner.os }}" == "Windows" ]; then
-          python -m eel launcher.py UI --add-data "UI;UI" --onefile --name SwiftDocz-${{ runner.os }}
+          python -m paling launcher.py UI --onefile --add-data "UI;UI" --name SwiftDocz-${{ runner.os }}
         else
-          python -m eel launcher.py UI --onefile --windowed --hidden-import=paling --add-data "app:app" --add-data "UI:UI" --name SwiftDocz-${{ runner.os }}
+          python -m paling launcher.py UI --onefile --windowed --add-data "UI:UI" --name SwiftDocz-${{ runner.os }}
         fi
       shell: bash
       working-directory: ./SwiftDocz
