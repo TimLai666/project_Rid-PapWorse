@@ -54,7 +54,9 @@ jobs:
       shell: bash
 
     - name: Create SwiftDocz Output Directory
-      run: mkdir -p output/SwiftDocz
+      run: |
+        cd ../
+        mkdir -p output/SwiftDocz
 
     - name: Move Executable to SwiftDocz Output Folder
       run: |
