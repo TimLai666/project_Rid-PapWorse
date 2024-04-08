@@ -50,4 +50,4 @@ paling.start('main.html', size=(1910, 1080), port=5349)  # 启动应用，打开
 
 
 # 打包命令
-# pyinstaller --add-data 'UI:UI' launcher.py
+# pyinstaller -F --add-data 'UI;UI' --add-data 'app;app' launcher.py
