@@ -46,7 +46,7 @@ jobs:
     - name: Build Executable
       run: |
         if [ "${{ runner.os }}" == "Windows" ]; then
-          python -m paling launcher.py UI --onefile --add-data "UI;UI" --name SwiftDocz-${{ runner.os }}
+          python -m paling launcher.py UI --onefile --name SwiftDocz-${{ runner.os }}
         else
           python -m paling launcher.py UI --onefile --windowed --add-data "UI:UI" --name SwiftDocz-${{ runner.os }}
         fi
