@@ -47,6 +47,10 @@ jobs:
       run: |
         if [ "${{ runner.os }}" == "Windows" ]; then
           pyinstaller -F --add-data 'UI;UI' --add-data 'app;app' launcher.py --name SwiftDocz-${{ runner.os }}
+        elif [ "${{ runner.os }}" == "macOS" ]; then
+          pip install py2app
+          py2applet --make-setup launcher.py
+          python setup.py py2app
         else
           pyinstaller -F --add-data 'UI:UI' --add-data 'app:app' launcher.py --name SwiftDocz-${{ runner.os }}
         fi
