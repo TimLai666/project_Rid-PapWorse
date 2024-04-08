@@ -14,10 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Set up Python 3.11
+    - name: Set up Python 3.12
       uses: actions/setup-python@v2
       with:
-        python-version: '3.11'
+        python-version: '3.12'
 
     - name: Install pipreqs
       run: pip install pipreqs
@@ -46,9 +46,9 @@ jobs:
     - name: Build Executable
       run: |
         if [ "${{ runner.os }}" == "Windows" ]; then
-          pyinstaller launcher.py --add-data "UI;UI" --onefile --windowed --name SwiftDocz-${{ runner.os }}
+          pyinstaller launcher.py --add-data "UI;UI" --onefile --name SwiftDocz-${{ runner.os }}
         else
-          pyinstaller launcher.py --add-data "UI:UI" --onefile --windowed --name SwiftDocz-${{ runner.os }}
+          pyinstaller launcher.py --add-data "UI:UI" --onefile --name SwiftDocz-${{ runner.os }}
         fi
       shell: bash
       working-directory: ./SwiftDocz
